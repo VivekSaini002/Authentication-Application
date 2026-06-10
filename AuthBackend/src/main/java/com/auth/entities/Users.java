@@ -45,7 +45,7 @@ public class Users implements UserDetails {
 	private String name; 
 	@Column(nullable = false, unique = true)
 	private String email;
-	@Column(nullable = false)
+	@Column(nullable = true)
 	private String password;
 	private String image;
 	private boolean enable;
