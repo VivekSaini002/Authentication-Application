@@ -22,6 +22,6 @@ public class AuthServiceImpl implements AuthService {
 		userDto.setPassword(passwordEncoder.encode(userDto.getPassword()));
 		UserDto user = userService.createUser(userDto);
 		return user;
-	}
+	}			
 
 }

@@ -4,6 +4,7 @@ import java.time.Instant;
 import java.util.UUID;
 
 import org.modelmapper.ModelMapper;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.auth.dtos.UserDto;
@@ -22,6 +23,7 @@ public class UserServiceImpl implements UserService{
 	
 	private final UserRepository userRepository;
 	private final ModelMapper modelMapper;
+	private final PasswordEncoder passwordEncoder;
 
 	@Override
 	public UserDto createUser(UserDto userDto) {
@@ -34,6 +36,7 @@ public class UserServiceImpl implements UserService{
 		}
 		
 		userDto.setProvider(userDto.getProvider() != null ? userDto.getProvider() : Provider.LOCAL);
+//		userDto.setPassword(passwordEncoder.encode(userDto.getPassword()));
 		
 		Users user = modelMapper.map(userDto, Users.class);
 		Users savedUser = userRepository.save(user);
@@ -61,6 +64,7 @@ public class UserServiceImpl implements UserService{
 		
 		if(userDto.getPassword() != null) {
 			user.setPassword(userDto.getPassword());
+//			user.setPassword(passwordEncoder.encode(user.getPassword()));
 		}
 		
 		if(userDto.getImage() != null) {
